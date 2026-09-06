@@ -5,9 +5,21 @@ services:
    image: chandrika11499/automation:db
    ports:
      - "3306:3306"
+   deploy:
+    replicas: 3
+   networks:
+    - mynetwork
  application:
    image: chandrika11499/automation:app
    ports:
      - "1111:8080"
+   deploy:
+    replicas: 3
+   networks:
+     - mynetwork
    depends_on:
      - "devopsdb"
+  networks:
+   - mynetwork:
+        driver: overlay
+     
